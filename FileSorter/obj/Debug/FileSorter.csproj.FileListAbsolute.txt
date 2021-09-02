@@ -1,0 +1,15 @@
+C:\Users\kurat\source\repos\FileSorter\FileSorter\bin\Debug\FileSorter.exe.config
+C:\Users\kurat\source\repos\FileSorter\FileSorter\bin\Debug\FileSorter.exe
+C:\Users\kurat\source\repos\FileSorter\FileSorter\bin\Debug\FileSorter.pdb
+C:\Users\kurat\source\repos\FileSorter\FileSorter\obj\Debug\FileSorter.csprojAssemblyReference.cache
+C:\Users\kurat\source\repos\FileSorter\FileSorter\obj\Debug\MainWindow.g.cs
+C:\Users\kurat\source\repos\FileSorter\FileSorter\obj\Debug\App.g.cs
+C:\Users\kurat\source\repos\FileSorter\FileSorter\obj\Debug\FileSorter_MarkupCompile.cache
+C:\Users\kurat\source\repos\FileSorter\FileSorter\obj\Debug\FileSorter_MarkupCompile.lref
+C:\Users\kurat\source\repos\FileSorter\FileSorter\obj\Debug\MainWindow.baml
+C:\Users\kurat\source\repos\FileSorter\FileSorter\obj\Debug\FileSorter.g.resources
+C:\Users\kurat\source\repos\FileSorter\FileSorter\obj\Debug\FileSorter.Properties.Resources.resources
+C:\Users\kurat\source\repos\FileSorter\FileSorter\obj\Debug\FileSorter.csproj.GenerateResource.cache
+C:\Users\kurat\source\repos\FileSorter\FileSorter\obj\Debug\FileSorter.csproj.CoreCompileInputs.cache
+C:\Users\kurat\source\repos\FileSorter\FileSorter\obj\Debug\FileSorter.exe
+C:\Users\kurat\source\repos\FileSorter\FileSorter\obj\Debug\FileSorter.pdb

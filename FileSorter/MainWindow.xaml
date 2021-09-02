@@ -1,0 +1,39 @@
+﻿<Window x:Class="FileSorter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileSorter"
+        mc:Ignorable="d"
+        x:Name="mainWindow"
+        Title="File Sorter 3000" Height="550" Width="900">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Row="0" Grid.Column="0" Content="Open" FontSize="20" Width="60" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <GridSplitter Grid.Row="0" Grid.ColumnSpan="2" Background="Black" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Каталог дисков" FontSize="15" FontWeight="Bold" TextDecorations="Underline"/>
+        
+        <ListBox Margin="10" FontWeight="Bold" Grid.Row="2" Grid.Column="0" Background="Beige" ItemsSource="{Binding ElementName=mainWindow, Path=DriveCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <ListBoxItem Content="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" Grid.Column="1" Margin="10">
+            <StackPanel >
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
