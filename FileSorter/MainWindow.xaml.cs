@@ -22,14 +22,25 @@ namespace FileSorter
     /// </summary>
     public partial class MainWindow : Window
     {
-     //   public DriveInfo[] DriveCollection = DriveInfo.GetDrives();
         public ObservableCollection<DriveInfo> DriveCollection { get; set; } = new ObservableCollection<DriveInfo> { };
+        public DriveInfo[] _drives = null;
         public MainWindow()
         {
             InitializeComponent();
 
-            DriveInfo[] drives = DriveInfo.GetDrives();
-            foreach (DriveInfo drive in drives)
+            PullOutDrives();
+        }
+
+        private void updateDriveListBt_Click(object sender, RoutedEventArgs e)
+        {
+            DriveCollection.Clear();
+            PullOutDrives();
+        }
+
+        private void PullOutDrives()
+        {
+            _drives = DriveInfo.GetDrives();
+            foreach (DriveInfo drive in _drives)
             {
                 DriveCollection.Add(drive);
             }
