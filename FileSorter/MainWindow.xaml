@@ -26,9 +26,9 @@
 
         <Button Margin="5" Grid.Row="1" Grid.Column="0" Content="Open" FontSize="15" FontFamily="Arial Italic" Width="60" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <GridSplitter Grid.Row="1" Grid.ColumnSpan="2" Background="Black" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Каталог дисков" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Каталог дисков" FontSize="15" FontFamily="Arial Italic" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
-        <ListBox x:Name="listOfDrives" Margin="10 0 10 10" FontWeight="Bold" Grid.Row="3" Grid.Column="0" Background="Beige" ItemsSource="{Binding ElementName=mainWindow, Path=DriveCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+        <ListBox x:Name="listOfDrives" Margin="10 0 10 10" Grid.Row="3" Grid.Column="0" Background="Beige" ItemsSource="{Binding ElementName=mainWindow, Path=DriveCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <ListBoxItem Content="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -36,7 +36,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button x:Name="updateDriveListBt" FontFamily="Arial Italic" Grid.Row="4" Grid.Column="0" Width="120" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Update" Click="updateDriveListBt_Click"/>
+        <Button x:Name="updateDriveListBt" FontFamily="Arial Italic" Grid.Row="4" Grid.Column="0" Width="60" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Update" Click="updateDriveListBt_Click"/>
 
         <Border BorderBrush="Black" BorderThickness="1" Grid.Row="3" Grid.Column="1" Margin="10">
             <StackPanel Background="Linen">
