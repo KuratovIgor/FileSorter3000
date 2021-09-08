@@ -23,7 +23,11 @@ namespace FileSorter
     public partial class MainWindow : Window
     {
         public ObservableCollection<DriveInfo> DriveCollection { get; set; } = new ObservableCollection<DriveInfo> { };
-        public DriveInfo[] _drives = null;
+        public ObservableCollection<CatalogItem> DriveDirectoryCollection { get; set; } = new ObservableCollection<CatalogItem> { };
+        private List<CatalogItem> _catalogItems = new List<CatalogItem> { };
+        private DriveInfo[] _drives = null;
+        private DirectoryInfo _driveDirectory = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -43,6 +47,32 @@ namespace FileSorter
             foreach (DriveInfo drive in _drives)
             {
                 DriveCollection.Add(drive);
+            }
+        }
+
+        private void listOfDrives_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DriveDirectoryCollection.Clear();
+            _driveDirectory = new DirectoryInfo(listOfDrives.SelectedValue.ToString());
+            
+            GetItemsOfCatalog();
+         
+            foreach(var item in _catalogItems)
+            {
+                DriveDirectoryCollection.Add(item);
+            }
+        }
+
+        private void GetItemsOfCatalog()
+        {
+            _catalogItems.Clear();
+            foreach (var item in _driveDirectory.GetDirectories())
+            {
+                _catalogItems.Add(new CatalogItem(item));
+            }
+            foreach (var item in _driveDirectory.GetFiles())
+            {
+                _catalogItems.Add(new CatalogItem(item));
             }
         }
     }

@@ -28,7 +28,7 @@
         <GridSplitter Grid.Row="1" Grid.ColumnSpan="2" Background="Black" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Каталог дисков" FontSize="15" FontFamily="Arial Italic" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
-        <ListBox x:Name="listOfDrives" Margin="10 0 10 10" Grid.Row="3" Grid.Column="0" Background="Beige" ItemsSource="{Binding ElementName=mainWindow, Path=DriveCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+        <ListBox SelectionChanged="listOfDrives_SelectionChanged" x:Name="listOfDrives" Margin="10 0 10 10" Grid.Row="3" Grid.Column="0" Background="Beige" ItemsSource="{Binding ElementName=mainWindow, Path=DriveCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <ListBoxItem Content="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -39,9 +39,27 @@
         <Button x:Name="updateDriveListBt" FontFamily="Arial Italic" Grid.Row="4" Grid.Column="0" Width="60" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Update" Click="updateDriveListBt_Click"/>
 
         <Border BorderBrush="Black" BorderThickness="1" Grid.Row="3" Grid.Column="1" Margin="10">
-            <StackPanel Background="Linen">
+            <ScrollViewer>
+                <StackPanel Background="Linen">
+                    <ListBox ItemsSource="{Binding ElementName=mainWindow, Path=DriveDirectoryCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" BorderThickness="1" Width="600">
+                                    <Grid Background="{Binding Path=Color, UpdateSourceTrigger=PropertyChanged}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
 
-            </StackPanel>
+                                        <ListBoxItem Grid.Column="0" Content="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <Label Grid.Column="1" Content="{Binding Path=TypeItem, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Red"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </ScrollViewer>
         </Border>
     </Grid>
 </Window>
