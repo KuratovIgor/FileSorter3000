@@ -16,22 +16,25 @@ namespace FileSorter
         private FileInfo _file = null;
 
         public string Name { get; set; }
-        public string TypeItem { get; set; }
         public Brush Color { get; set; }
+        public string Extension { get; set; }
+        public DateTime CreationTime { get; set; }
 
         public CatalogItem(DirectoryInfo directory)
         {
             _directory = directory;
             Name = directory.Name;
-            TypeItem = "Folder";
-            Color = Brushes.LemonChiffon;
+            Color = Brushes.LightGray;
+            Extension = directory.Extension;
+            CreationTime = directory.CreationTime;
         }
 
         public CatalogItem(FileInfo file)
         {
             _file = file;
             Name = file.Name;
-            TypeItem = "File";
+            Extension = file.Extension;
+            CreationTime = file.CreationTime;
         }
 
         public object GetCatalogItem()

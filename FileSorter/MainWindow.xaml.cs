@@ -61,6 +61,8 @@ namespace FileSorter
             {
                 DriveDirectoryCollection.Add(item);
             }
+
+            path.Text = _driveDirectory.FullName;
         }
 
         private void GetItemsOfCatalog()
