@@ -23,58 +23,115 @@ namespace FileSorter
     public partial class MainWindow : Window
     {
         public ObservableCollection<DriveInfo> DriveCollection { get; set; } = new ObservableCollection<DriveInfo> { };
-        public ObservableCollection<CatalogItem> DriveDirectoryCollection { get; set; } = new ObservableCollection<CatalogItem> { };
+        public ObservableCollection<CatalogItem> DirectoryCollection { get; set; } = new ObservableCollection<CatalogItem> { };
         private List<CatalogItem> _catalogItems = new List<CatalogItem> { };
         private DriveInfo[] _drives = null;
-        private DirectoryInfo _driveDirectory = null;
+        private DirectoryInfo _currentDirectory = null;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            PullOutDrives();
+            ObservableCollection<DriveInfo> newCollection = DirectoryMover.PullOutDrives();
+            foreach (var item in newCollection)
+            {
+                DriveCollection.Add(item);
+            }
         }
 
         private void updateDriveListBt_Click(object sender, RoutedEventArgs e)
         {
             DriveCollection.Clear();
-            PullOutDrives();
-        }
-
-        private void PullOutDrives()
-        {
-            _drives = DriveInfo.GetDrives();
-            foreach (DriveInfo drive in _drives)
+            ObservableCollection<DriveInfo> newCollection = DirectoryMover.PullOutDrives();
+            foreach (var item in newCollection)
             {
-                DriveCollection.Add(drive);
+                DriveCollection.Add(item);
             }
         }
 
         private void listOfDrives_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DriveDirectoryCollection.Clear();
-            _driveDirectory = new DirectoryInfo(listOfDrives.SelectedValue.ToString());
-            
-            GetItemsOfCatalog();
-         
-            foreach(var item in _catalogItems)
+            DirectoryCollection.Clear();
+            DirectoryInfo directory = new DirectoryInfo(listOfDrives.SelectedValue.ToString());
+            ObservableCollection<CatalogItem> newCollection = DirectoryMover.MoveNext(directory);
+
+            foreach(var item in newCollection)
             {
-                DriveDirectoryCollection.Add(item);
+                if (!DirectoryMover.IsFileException(item))
+                    DirectoryCollection.Add(item);
             }
 
-            path.Text = _driveDirectory.FullName;
+            path.Text = directory.FullName;
+            _currentDirectory = new DirectoryInfo(directory.FullName);
         }
 
-        private void GetItemsOfCatalog()
+        private void CatalogList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _catalogItems.Clear();
-            foreach (var item in _driveDirectory.GetDirectories())
+            if (catalogList.SelectedValue != null)
+                MoveToDirectory();
+        }
+
+        private void MoveToDirectory()
+        {
+            try
             {
-                _catalogItems.Add(new CatalogItem(item));
+                CatalogItem catalogItem = catalogList.SelectedValue as CatalogItem;
+
+                if ((catalogItem.GetCatalogItem() as DirectoryInfo) != null)
+                {
+                    CatalogItem catalog = catalogList.SelectedValue as CatalogItem;
+                    DirectoryInfo directory = new DirectoryInfo((catalog.GetCatalogItem() as DirectoryInfo).FullName);
+
+                    _currentDirectory = new DirectoryInfo(directory.FullName);
+                    path.Text = _currentDirectory.FullName;
+
+                    ObservableCollection<CatalogItem> newCollection = DirectoryMover.MoveNext(directory);
+
+                    UpdateDirectoryCollection(newCollection);
+                }
             }
-            foreach (var item in _driveDirectory.GetFiles())
+            catch (Exception)
             {
-                _catalogItems.Add(new CatalogItem(item));
+                MessageBox.Show("Отказано в доступе");
+            }
+        }
+
+        private void UpdateDirectoryCollection(ObservableCollection<CatalogItem> collection)
+        {
+            ObservableCollection<CatalogItem> newCollection = collection;
+
+            foreach (var item in DirectoryCollection)
+            {
+                if (!DirectoryMover.IsFileException(item))
+                    newCollection.Add(item);
+            }
+
+            foreach (var item in newCollection)
+            {
+                if (DirectoryCollection.Contains(item))
+                    DirectoryCollection.Remove(item);
+                else if (!DirectoryMover.IsFileException(item))
+                    DirectoryCollection.Add(item);
+            }
+        }
+
+        private void BackBt_OnClick(object sender, RoutedEventArgs e)
+        {
+            DirectoryCollection.Clear();
+            DirectoryInfo directory = new DirectoryInfo(_currentDirectory.FullName);
+
+            if (directory.Parent != null)
+            {
+                ObservableCollection<CatalogItem> newCollection = DirectoryMover.MoveBack(directory);
+
+                foreach (var item in newCollection)
+                {
+                    if (!DirectoryMover.IsFileException(item))
+                        DirectoryCollection.Add(item);
+                }
+
+                _currentDirectory = new DirectoryInfo(directory.Parent.FullName);
+                path.Text = _currentDirectory.FullName;
             }
         }
     }

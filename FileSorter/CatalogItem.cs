@@ -5,18 +5,39 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using static System.Net.Mime.MediaTypeNames;
 using System.Windows.Media;
 
 namespace FileSorter
 {
-    public class CatalogItem
+    public class CatalogItem : INotifyPropertyChanged
     {
         private DirectoryInfo _directory = null;
         private FileInfo _file = null;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
         public string Name { get; set; }
-        public Brush Color { get; set; }
+        public Brush _color;
+        public Brush Color
+        {
+            get
+            {
+                return _color;
+            }
+            set
+            {
+                _color = value;
+                OnPropertyChanged(nameof(Color));
+            }
+        }
         public string Extension { get; set; }
         public DateTime CreationTime { get; set; }
 

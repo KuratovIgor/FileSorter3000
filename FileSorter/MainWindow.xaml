@@ -22,7 +22,6 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <!--Wheat-->
         <Border Background="Gray" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2" Margin="5">
             <TextBlock Foreground="Gold" Text="File Sorter 3000" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontFamily="Arial Italic"/>
         </Border>
@@ -36,6 +35,9 @@
         </Border>
         
         <GridSplitter Grid.Row="1" Grid.ColumnSpan="2" Background="Black" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+
+        <Button x:Name="backBt" Grid.Row="2" Grid.Column="0" Click="BackBt_OnClick" Margin="5" Width="50" Height="30" HorizontalAlignment="Left" Content="Back" FontSize="15" FontFamily="Arial Italic"/>
+
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Каталог дисков" FontSize="15" FontFamily="Arial Italic" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
         <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Grid.Row="4" Grid.Column="0" Margin="10 0 10 10" Background="Beige">
@@ -61,7 +63,7 @@
             </Border.BitmapEffect>
             <ScrollViewer Height="330">
                 <StackPanel Width="640" Background="Linen">
-                    <ListBox BorderBrush="Linen" Background="Linen" ItemsSource="{Binding ElementName=mainWindow, Path=DriveDirectoryCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+                    <ListBox x:Name="catalogList" SelectionChanged="CatalogList_OnSelectionChanged" BorderBrush="Linen" Background="Linen" ItemsSource="{Binding ElementName=mainWindow, Path=DirectoryCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderBrush="Black" BorderThickness="1" Width="600">
