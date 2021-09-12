@@ -25,25 +25,24 @@ namespace FileSorter
     {
         public ObservableCollection<DriveInfo> DriveCollection { get; set; } = new ObservableCollection<DriveInfo> { };
         public ObservableCollection<CatalogItem> DirectoryCollection { get; set; } = new ObservableCollection<CatalogItem> { };
-        private List<CatalogItem> _catalogItems = new List<CatalogItem> { };
-        private DriveInfo[] _drives = null;
         private DirectoryInfo _currentDirectory = null;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            ObservableCollection<DriveInfo> newCollection = DirectoryMover.PullOutDrives();
-            foreach (var item in newCollection)
-            {
-                DriveCollection.Add(item);
-            }
+            UpdateDriveCollection();
         }
 
         private void updateDriveListBt_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDriveCollection();
+        }
+
+        private void UpdateDriveCollection()
+        {
             DriveCollection.Clear();
-            ObservableCollection<DriveInfo> newCollection = DirectoryMover.PullOutDrives();
+            ObservableCollection<DriveInfo> newCollection = DirectoryNavigator.PullOutDrives();
             foreach (var item in newCollection)
             {
                 DriveCollection.Add(item);
@@ -52,15 +51,10 @@ namespace FileSorter
 
         private void listOfDrives_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DirectoryCollection.Clear();
             DirectoryInfo directory = new DirectoryInfo(listOfDrives.SelectedValue.ToString());
-            ObservableCollection<CatalogItem> newCollection = DirectoryMover.MoveNext(directory);
+            List<CatalogItem> newCollection = DirectoryNavigator.MoveNext(directory);
 
-            foreach(var item in newCollection)
-            {
-                if (!DirectoryMover.IsFileException(item))
-                    DirectoryCollection.Add(item);
-            }
+            UpdateDirectoryCollection(newCollection);
 
             path.Text = directory.FullName;
             _currentDirectory = new DirectoryInfo(directory.FullName);
@@ -86,7 +80,7 @@ namespace FileSorter
                     _currentDirectory = new DirectoryInfo(directory.FullName);
                     path.Text = _currentDirectory.FullName;
 
-                    ObservableCollection<CatalogItem> newCollection = DirectoryMover.MoveNext(directory);
+                    List<CatalogItem> newCollection = DirectoryNavigator.MoveNext(directory);
 
                     UpdateDirectoryCollection(newCollection);
                 }
@@ -97,39 +91,25 @@ namespace FileSorter
             }
         }
 
-        private void UpdateDirectoryCollection(ObservableCollection<CatalogItem> collection)
+        private void UpdateDirectoryCollection(List<CatalogItem> collection)
         {
-            ObservableCollection<CatalogItem> newCollection = collection;
+            DirectoryCollection.Clear();
 
-            foreach (var item in DirectoryCollection)
+            foreach (var item in collection)
             {
-                if (!DirectoryMover.IsFileException(item))
-                    newCollection.Add(item);
-            }
-
-            foreach (var item in newCollection)
-            {
-                if (DirectoryCollection.Contains(item))
-                    DirectoryCollection.Remove(item);
-                else if (!DirectoryMover.IsFileException(item))
-                    DirectoryCollection.Add(item);
+                DirectoryCollection.Add(item);
             }
         }
 
         private void BackBt_OnClick(object sender, RoutedEventArgs e)
         {
-            DirectoryCollection.Clear();
             DirectoryInfo directory = new DirectoryInfo(_currentDirectory.FullName);
 
             if (directory.Parent != null)
             {
-                ObservableCollection<CatalogItem> newCollection = DirectoryMover.MoveBack(directory);
+                List<CatalogItem> newCollection = DirectoryNavigator.MoveBack(directory);
 
-                foreach (var item in newCollection)
-                {
-                    if (!DirectoryMover.IsFileException(item))
-                        DirectoryCollection.Add(item);
-                }
+                UpdateDirectoryCollection(newCollection);
 
                 _currentDirectory = new DirectoryInfo(directory.Parent.FullName);
                 path.Text = _currentDirectory.FullName;
@@ -138,16 +118,20 @@ namespace FileSorter
 
         private void SortExtensionBt_OnClick(object sender, RoutedEventArgs e)
         {
-            DirectoryMover.SortExtension(_currentDirectory);
+            FSorter.SortExtension(_currentDirectory);
 
-            DirectoryCollection.Clear();
+            List<CatalogItem> catalogItems = DirectoryNavigator.GetItemsOfCatalog(_currentDirectory);
 
-            List<CatalogItem> catalogItems = DirectoryMover.GetItemsOfCatalog(_currentDirectory);
+            UpdateDirectoryCollection(catalogItems);
+        }
 
-            foreach (var item in catalogItems)
-            {
-                DirectoryCollection.Add(item);
-            }
+        private void SortAlphaviteBt_OnClick(object sender, RoutedEventArgs e)
+        {
+            FSorter.SortAlphavite(_currentDirectory);
+
+            List<CatalogItem> catalogItems = DirectoryNavigator.GetItemsOfCatalog(_currentDirectory);
+
+            UpdateDirectoryCollection(catalogItems);
         }
     }
 }

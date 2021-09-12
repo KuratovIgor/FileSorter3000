@@ -14,8 +14,8 @@ namespace FileSorter
 {
     public class CatalogItem : INotifyPropertyChanged
     {
-        private DirectoryInfo _directory = null;
-        private FileInfo _file = null;
+        private readonly DirectoryInfo _directory = null;
+        private readonly FileInfo _file = null;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
@@ -25,13 +25,10 @@ namespace FileSorter
         }
 
         public string Name { get; set; }
-        public Brush _color;
+        private Brush _color;
         public Brush Color
         {
-            get
-            {
-                return _color;
-            }
+            get => _color;
             set
             {
                 _color = value;

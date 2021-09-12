@@ -64,7 +64,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CatalogItem.cs" />
-    <Compile Include="DirectoryMover.cs" />
+    <Compile Include="DirectoryNavigator.cs" />
+    <Compile Include="FSorter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

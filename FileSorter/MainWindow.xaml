@@ -50,7 +50,7 @@
 
                 <TextBlock Grid.Column="0" Text="Сортировка:" FontSize="15" FontFamily="Arial Italic" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Button x:Name="sortExtensionBt" Click="SortExtensionBt_OnClick" Content="Extension" FontSize="15" Grid.Column="1" FontFamily="Arial Italic" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Button x:Name="sortAlphaviteBt" Content="Alphavite" FontSize="15" FontFamily="Arial Italic" Grid.Column="2" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button x:Name="sortAlphaviteBt" Click="SortAlphaviteBt_OnClick" Content="Alphavite" FontSize="15" FontFamily="Arial Italic" Grid.Column="2" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Button x:Name="sortDateBt" Content="Date" FontSize="15" FontFamily="Arial Italic" Grid.Column="3" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Button x:Name="sortLengthBt" Content="Length" FontSize="15" FontFamily="Arial Italic" Grid.Column="4" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
