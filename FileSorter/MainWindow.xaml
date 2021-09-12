@@ -26,7 +26,7 @@
             <TextBlock Foreground="Gold" Text="File Sorter 3000" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontFamily="Arial Italic"/>
         </Border>
 
-        <Button Margin="5" Grid.Row="1" Grid.Column="0" Content="Open" FontSize="15" FontFamily="Arial Italic" Width="90" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button x:Name="openDirectoryBt" Margin="5" Grid.Row="1" Grid.Column="0" Content="Open" FontSize="15" FontFamily="Arial Italic" Width="90" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Border Background="White" CornerRadius="10" Width="650" Height="30" Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
             <Border.BitmapEffect>
                 <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
@@ -37,6 +37,24 @@
         <GridSplitter Grid.Row="1" Grid.ColumnSpan="2" Background="Black" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
 
         <Button x:Name="backBt" Grid.Row="2" Grid.Column="0" Click="BackBt_OnClick" Margin="5" Width="50" Height="30" HorizontalAlignment="Left" Content="Back" FontSize="15" FontFamily="Arial Italic"/>
+
+        <!--<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">-->
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Сортировка:" FontSize="15" FontFamily="Arial Italic" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button x:Name="sortExtensionBt" Click="SortExtensionBt_OnClick" Content="Extension" FontSize="15" Grid.Column="1" FontFamily="Arial Italic" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button x:Name="sortAlphaviteBt" Content="Alphavite" FontSize="15" FontFamily="Arial Italic" Grid.Column="2" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button x:Name="sortDateBt" Content="Date" FontSize="15" FontFamily="Arial Italic" Grid.Column="3" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button x:Name="sortLengthBt" Content="Length" FontSize="15" FontFamily="Arial Italic" Grid.Column="4" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        <!--</StackPanel>-->
 
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Каталог дисков" FontSize="15" FontFamily="Arial Italic" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 

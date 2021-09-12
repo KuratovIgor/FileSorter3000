@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using Microsoft.Win32;
 
 namespace FileSorter
 {
@@ -132,6 +133,20 @@ namespace FileSorter
 
                 _currentDirectory = new DirectoryInfo(directory.Parent.FullName);
                 path.Text = _currentDirectory.FullName;
+            }
+        }
+
+        private void SortExtensionBt_OnClick(object sender, RoutedEventArgs e)
+        {
+            DirectoryMover.SortExtension(_currentDirectory);
+
+            DirectoryCollection.Clear();
+
+            List<CatalogItem> catalogItems = DirectoryMover.GetItemsOfCatalog(_currentDirectory);
+
+            foreach (var item in catalogItems)
+            {
+                DirectoryCollection.Add(item);
             }
         }
     }

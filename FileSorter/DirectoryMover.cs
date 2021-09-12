@@ -13,18 +13,22 @@ namespace FileSorter
         private static List<CatalogItem> NewCatalogItems = new List<CatalogItem>{};
         private static DirectoryInfo _directory = null;
 
-        private static void GetItemsOfCatalog()
+        public static List<CatalogItem> GetItemsOfCatalog(DirectoryInfo directory)
         {
-            foreach (var item in _directory.GetDirectories())
+            List<CatalogItem> newCatalogItems = new List<CatalogItem> { };
+
+            foreach (var item in directory.GetDirectories())
             {
                 if (!IsFileException(item))
-                    NewCatalogItems.Add(new CatalogItem(item));
+                    newCatalogItems.Add(new CatalogItem(item));
             }
-            foreach (var item in _directory.GetFiles())
+            foreach (var item in directory.GetFiles())
             {
                 if (!IsFileException(item))
-                    NewCatalogItems.Add(new CatalogItem(item));
+                    newCatalogItems.Add(new CatalogItem(item));
             }
+
+            return newCatalogItems;
         }
 
         public static ObservableCollection<DriveInfo> PullOutDrives()
@@ -61,7 +65,7 @@ namespace FileSorter
         private static ObservableCollection<CatalogItem> GetNewDirectoryCollection()
         {
             NewCatalogItems.Clear();
-            GetItemsOfCatalog();
+            NewCatalogItems = GetItemsOfCatalog(_directory);
 
             ObservableCollection<CatalogItem> newCollection = new ObservableCollection<CatalogItem> { };
             foreach (var item in NewCatalogItems)
@@ -98,6 +102,44 @@ namespace FileSorter
                 return false;
 
             return true;
+        }
+
+        public static void SortExtension(DirectoryInfo currentDirectory)
+        {
+            List<FileInfo> files = currentDirectory.GetFiles().ToList();
+            List<DirectoryInfo> newDirectories = new List<DirectoryInfo> { };
+
+            bool isExist = false;
+
+            foreach (var file in files)
+            {
+                DirectoryInfo dir = new DirectoryInfo(currentDirectory.FullName + $@"\{file.Extension}");
+
+                foreach (var directory in newDirectories)
+                {
+                    if (directory.FullName == dir.FullName)
+                    {
+                        isExist = true;
+                        break;
+                    }
+                }
+
+                if (!isExist)
+                    newDirectories.Add(dir);
+
+                isExist = false;
+            }
+
+            foreach (var directory in newDirectories)
+            {
+                directory.Create();
+
+                foreach (var file in files)
+                {
+                    if (file.Extension == directory.Name)
+                        file.MoveTo(directory.FullName + $@"\{file.Name}");
+                }
+            }
         }
     }
 }
