@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MainViewModel.cs" />
+    <Compile Include="RelayComand.cs" />
+    <Compile Include="Sorts\SortAlphavite.cs" />
+    <Compile Include="Sorts\SortDate.cs" />
+    <Compile Include="Sorts\SortExtension.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -65,7 +70,8 @@
     </Compile>
     <Compile Include="CatalogItem.cs" />
     <Compile Include="DirectoryNavigator.cs" />
-    <Compile Include="FSorter.cs" />
+    <Compile Include="Sorts\FSorter.cs" />
+    <Compile Include="Sorts\ISort.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -97,5 +103,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

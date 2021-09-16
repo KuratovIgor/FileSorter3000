@@ -76,19 +76,10 @@ namespace FileSorter
             return newCollection;
         }
 
-        public static bool IsFileException(CatalogItem item)
-        {
-            if (item.Name[0] != '$' && item.Name[0] != '~' && item.Extension.ToString() != ".sys" &&
-                item.Extension.ToString() != ".tmp" && item.Extension.ToString() != ".Msi")
-                return false;
-
-            return true;
-        }
-
         public static bool IsFileException(DirectoryInfo item)
         {
-            if (item.Name[0] != '$' && item.Name[0] != '~' && item.Extension.ToString() != ".sys" &&
-                item.Extension.ToString() != ".tmp" && item.Extension.ToString() != ".Msi")
+            if (item.Name[0] != '$' && item.Name[0] != '~' && item.Extension != ".sys" &&
+                item.Extension != ".tmp" && item.Extension != ".Msi")
                 return false;
 
             return true;
@@ -96,8 +87,8 @@ namespace FileSorter
 
         public static bool IsFileException(FileInfo item)
         {
-            if (item.Name[0] != '$' && item.Name[0] != '~' && item.Extension.ToString() != ".sys" &&
-                item.Extension.ToString() != ".tmp" && item.Extension.ToString() != ".Msi")
+            if (item.Name[0] != '$' && item.Name[0] != '~' && item.Extension != ".sys" &&
+                item.Extension != ".tmp" && item.Extension != ".Msi")
                 return false;
 
             return true;
