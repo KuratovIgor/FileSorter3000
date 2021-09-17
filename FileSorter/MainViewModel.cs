@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using FileSorter.Sorts;
 using System.Diagnostics;
+using System.Windows.Forms;
+using MessageBox = System.Windows.MessageBox;
 
 namespace FileSorter
 {
@@ -26,6 +28,8 @@ namespace FileSorter
         public ObservableCollection<CatalogItem> DirectoryCollection { get; set; } = new ObservableCollection<CatalogItem> { };
 
         public DirectoryInfo _currentDirectory = null;
+        private DriveInfo _drive;
+        private CatalogItem _catalogItem;
 
         private string _pathDir;
         public string PathDir
@@ -39,9 +43,6 @@ namespace FileSorter
         }
 
         #region Selections
-        private DriveInfo _drive;
-        private CatalogItem _catalogItem;
-
         public DriveInfo SelectedDrive
         {
             get => _drive;
@@ -75,11 +76,15 @@ namespace FileSorter
         private RelayCommand sortExtensionCommand;
         private RelayCommand sortAlphaviteCommand;
         private RelayCommand sortDateCommand;
+        private RelayCommand sortSizeCommand;
+        private RelayCommand openDirectoryCommand;
         public RelayCommand UpdateDriveList { get => updateDriveList ?? (updateDriveList = new RelayCommand(obj => UpdateDriveCollection())); }
         public RelayCommand BackCommand { get => backCommand ?? (backCommand = new RelayCommand(obj => Back())); }
         public RelayCommand SortExtensionCommand { get => sortExtensionCommand ?? (sortExtensionCommand = new RelayCommand(obj => Sort(new SortExtension()))); }
         public RelayCommand SortAlphaviteCommand { get => sortAlphaviteCommand ?? (sortAlphaviteCommand = new RelayCommand(obj => Sort(new SortAlphavite()))); }
         public RelayCommand SortDateCommand { get => sortDateCommand ?? (sortDateCommand = new RelayCommand(obj => Sort(new SortDate()))); }
+        public RelayCommand SortSizeCommand { get => sortSizeCommand ?? (sortSizeCommand = new RelayCommand(obj => Sort(new SortSize()))); }
+        public RelayCommand OpenDirectoryCommand { get => openDirectoryCommand ?? (openDirectoryCommand = new RelayCommand(obj => OpenDirectory())); }
         #endregion
 
         public MainViewModel()
@@ -97,18 +102,36 @@ namespace FileSorter
             }
         }
 
+        private void OpenDirectory()
+        {
+            FolderBrowserDialog browsDirectoryDialog = new FolderBrowserDialog();
+
+            if (browsDirectoryDialog.ShowDialog() == DialogResult.OK)
+            {
+                _catalogItem = new CatalogItem(new DirectoryInfo(browsDirectoryDialog.SelectedPath));
+
+                MoveToDirectory();
+
+                PathDir = _currentDirectory.FullName;
+            }
+        }
+
         private void Back()
         {
-            DirectoryInfo directory = new DirectoryInfo(_currentDirectory.FullName);
-
-            if (directory.Parent != null)
+            if (_currentDirectory != null)
             {
-                List<CatalogItem> newCollection = DirectoryNavigator.MoveBack(directory);
 
-                UpdateDirectoryCollection(newCollection);
+                DirectoryInfo directory = new DirectoryInfo(_currentDirectory.FullName);
 
-                _currentDirectory = new DirectoryInfo(directory.Parent.FullName);
-                PathDir = _currentDirectory.FullName;
+                if (directory.Parent != null)
+                {
+                    List<CatalogItem> newCollection = DirectoryNavigator.MoveBack(directory);
+
+                    UpdateDirectoryCollection(newCollection);
+
+                    _currentDirectory = new DirectoryInfo(directory.Parent.FullName);
+                    PathDir = _currentDirectory.FullName;
+                }
             }
         }
 
@@ -124,12 +147,15 @@ namespace FileSorter
 
         private void Sort(ISort sortObject)
         {
-            FSorter sorter = new FSorter(sortObject);
-            sorter.Sort(_currentDirectory);
+            if (_currentDirectory != null)
+            {
+                FSorter sorter = new FSorter(sortObject);
+                sorter.Sort(_currentDirectory);
 
-            List<CatalogItem> catalogItems = DirectoryNavigator.GetItemsOfCatalog(_currentDirectory);
+                List<CatalogItem> catalogItems = DirectoryNavigator.GetItemsOfCatalog(_currentDirectory);
 
-            UpdateDirectoryCollection(catalogItems);
+                UpdateDirectoryCollection(catalogItems);
+            }
         }
 
         private void ListOfDrives_SelectionChanged()

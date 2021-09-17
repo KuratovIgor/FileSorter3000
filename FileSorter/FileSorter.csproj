@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -60,6 +61,7 @@
     <Compile Include="Sorts\SortAlphavite.cs" />
     <Compile Include="Sorts\SortDate.cs" />
     <Compile Include="Sorts\SortExtension.cs" />
+    <Compile Include="Sorts\SortSize.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

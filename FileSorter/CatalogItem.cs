@@ -36,6 +36,7 @@ namespace FileSorter
             }
         }
         public string Extension { get; set; }
+        public string Size { get; set; }
         public DateTime CreationTime { get; set; }
 
         public CatalogItem(DirectoryInfo directory)
@@ -53,6 +54,18 @@ namespace FileSorter
             Name = file.Name;
             Extension = file.Extension;
             CreationTime = file.CreationTime;
+            
+            long size = file.Length / 1024;
+            if (size < 1024)
+                Size = size + "Kb";
+            else
+            {
+                size /= 1024;
+                if (size < 1024)
+                    Size = size + "Mb";
+                else
+                    Size = size / 1024 + "Gb";
+            }
         }
 
         public object GetCatalogItem()

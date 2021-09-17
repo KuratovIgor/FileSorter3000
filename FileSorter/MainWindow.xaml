@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FileSorter"
         mc:Ignorable="d"
         x:Name="mainWindow"
-        Title="File Sorter 3000" Height="600" Width="900">
+        Title="File Sorter 3000" Height="600" Width="1200">
     <Grid Background="LightGray" Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -29,14 +29,15 @@
             <Border.BitmapEffect>
                 <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
             </Border.BitmapEffect>
-            <Button x:Name="openDirectoryBt" Background="LightGray" BorderBrush="LightGray" Content="Open" FontSize="15" FontFamily="Arial Italic" Width="90" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Background="LightGray" BorderBrush="LightGray" Content="Открыть" Command="{Binding OpenDirectoryCommand}" FontSize="15" FontFamily="Arial Italic" Width="90" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-       
-        <Border Background="White" CornerRadius="10" Width="650" Height="30" Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+
+        <TextBlock Margin="140 0 0 0" Grid.Row="1" Grid.Column="1" Text="Путь:" FontSize="15" FontFamily="Arial Italic" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Border Margin="0 0 40 0" HorizontalAlignment="Right" Background="White" CornerRadius="10" Width="750" Height="30" Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
             <Border.BitmapEffect>
                 <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
             </Border.BitmapEffect>
-            <TextBlock x:Name="path" Text="{Binding Path=PathDir}" Background="White" TextAlignment="Center" FontSize="20" Width="620" Height="30"/>
+            <TextBlock x:Name="path" Text="{Binding Path=PathDir}" Background="White" TextAlignment="Center" FontSize="20" Width="720" Height="30"/>
         </Border>
         
         <GridSplitter Grid.Row="1" Grid.ColumnSpan="2" Background="Black" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
@@ -45,7 +46,7 @@
             <Border.BitmapEffect>
                 <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
             </Border.BitmapEffect>
-            <Button x:Name="backBt" Command="{Binding BackCommand}" Background="LightGray" BorderBrush="LightGray" Width="50" Height="30" Content="Back" FontSize="15" FontFamily="Arial Italic"/>
+            <Button Command="{Binding BackCommand}" Background="LightGray" BorderBrush="LightGray" Width="50" Height="30" Content="Назад" FontSize="15" FontFamily="Arial Italic"/>
         </Border>
 
         <Grid Grid.Row="2" Grid.Column="1">
@@ -57,44 +58,44 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Сортировка:" FontSize="15" FontFamily="Arial Italic" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="0" Text="Группировка:" FontSize="15" FontFamily="Arial Italic" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Border Grid.Column="1" Background="LightGray" CornerRadius="10" Width="120" Height="30" BorderBrush="Black" BorderThickness="1">
                 <Border.BitmapEffect>
                     <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
                 </Border.BitmapEffect>
-                <Button x:Name="sortExtensionBt" Command="{Binding SortExtensionCommand}" Content="Extension" Background="LightGray" BorderBrush="LightGray" FontSize="15" FontFamily="Arial Italic" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Command="{Binding SortExtensionCommand}" Content="Расширение" Background="LightGray" BorderBrush="LightGray" FontSize="15" FontFamily="Arial Italic" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
 
             <Border Grid.Column="2" Background="LightGray" CornerRadius="10" Width="120" Height="30" BorderBrush="Black" BorderThickness="1">
                 <Border.BitmapEffect>
                     <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
                 </Border.BitmapEffect>
-                <Button x:Name="sortAlphaviteBt" Command="{Binding SortAlphaviteCommand}" Content="Alphavite" Background="LightGray" BorderBrush="LightGray" FontSize="15" FontFamily="Arial Italic" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Command="{Binding SortAlphaviteCommand}" Content="Алфавит" Background="LightGray" BorderBrush="LightGray" FontSize="15" FontFamily="Arial Italic" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
 
             <Border Grid.Column="3" Background="LightGray" CornerRadius="10" Width="120" Height="30" BorderBrush="Black" BorderThickness="1">
                 <Border.BitmapEffect>
                     <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
                 </Border.BitmapEffect>
-                <Button x:Name="sortDateBt" Command="{Binding SortDateCommand}" Content="Date" FontSize="15" FontFamily="Arial Italic" Background="LightGray" BorderBrush="LightGray" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Command="{Binding SortDateCommand}" Content="Дата" FontSize="15" FontFamily="Arial Italic" Background="LightGray" BorderBrush="LightGray" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
 
             <Border Grid.Column="4" Background="LightGray" CornerRadius="10" Width="120" Height="30" BorderBrush="Black" BorderThickness="1">
                 <Border.BitmapEffect>
                     <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
                 </Border.BitmapEffect>
-                <Button x:Name="sortLengthBt" Content="Length" FontSize="15" FontFamily="Arial Italic" Background="LightGray" BorderBrush="LightGray" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Command="{Binding SortSizeCommand}" Content="Размер" FontSize="15" FontFamily="Arial Italic" Background="LightGray" BorderBrush="LightGray" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
         </Grid>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Каталог дисков" FontSize="15" FontFamily="Arial Italic" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
-        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Grid.Row="4" Grid.Column="0" Margin="10 0 10 10" Background="Beige">
+        <Border BorderBrush="Black"  BorderThickness="1" CornerRadius="10" Grid.Row="4" Grid.Column="0" Margin="10 10 10 10" Background="Beige">
             <Border.BitmapEffect>
                 <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
             </Border.BitmapEffect>
 
-            <ListBox BorderBrush="Beige" Margin="5" x:Name="listOfDrives" Background="Beige" ItemsSource="{Binding DriveCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedDrive, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox BorderBrush="Beige" Margin="5" Background="Beige" ItemsSource="{Binding DriveCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedDrive, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <ListBoxItem Content="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -103,43 +104,41 @@
             </ListBox>
         </Border>
 
-        <Border Grid.Row="5" Grid.Column="0" Width="80" Height="25" Background="LightGray" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="10">
+        <Border Grid.Row="5" Grid.Column="0" Width="90" Height="25" Background="LightGray" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="10">
             <Border.BitmapEffect>
                 <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
             </Border.BitmapEffect>
-            <Button x:Name="updateDriveListBt" FontFamily="Arial Italic" Background="LightGray" BorderBrush="LightGray" Width="60" Height="25" Content="Update" Command="{Binding UpdateDriveList}"/>
+            <Button FontFamily="Arial Italic" Background="LightGray" BorderBrush="LightGray" Width="70" Height="25" Content="Обновить" Command="{Binding UpdateDriveList}"/>
         </Border>
 
         <Border CornerRadius="10" Background="Linen" BorderBrush="Black" BorderThickness="1" Grid.Row="4" Grid.Column="1" Margin="10">
             <Border.BitmapEffect>
                 <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
             </Border.BitmapEffect>
-            <ScrollViewer Height="330">
-                <StackPanel Width="640" Background="Linen">
-                    <ListBox x:Name="catalogList" BorderBrush="Linen" Background="Linen" ItemsSource="{Binding DirectoryCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedCatalogItem, UpdateSourceTrigger=PropertyChanged}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Border BorderBrush="Black" BorderThickness="1" Width="620" CornerRadius="10" Background="{Binding Path=Color, UpdateSourceTrigger=PropertyChanged}">
-                                    <Border.BitmapEffect>
-                                        <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
-                                    </Border.BitmapEffect>
-                                    <Grid Width="600" Background="{Binding Path=Color, UpdateSourceTrigger=PropertyChanged}">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition Width="100"/>
-                                            <ColumnDefinition Width="40"/>
-                                        </Grid.ColumnDefinitions>
+            <ListBox Width="940" x:Name="catalogList" BorderBrush="Linen" Background="Linen" ItemsSource="{Binding DirectoryCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedCatalogItem, UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Black" BorderThickness="1" Width="900" CornerRadius="10" Background="{Binding Path=Color, UpdateSourceTrigger=PropertyChanged}">
+                            <Border.BitmapEffect>
+                                <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
+                            </Border.BitmapEffect>
+                            <Grid Width="880" Background="{Binding Path=Color, UpdateSourceTrigger=PropertyChanged}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="40"/>
+                                </Grid.ColumnDefinitions>
 
-                                        <Label Grid.Column="0" FontWeight="Bold" Foreground="Brown"  Content="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
-                                        <Label Grid.Column="2" Content="{Binding Path=Extension, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Red"/>
-                                        <Label Grid.Column="1" Content="{Binding Path=CreationTime, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </StackPanel>
-            </ScrollViewer>
+                                <Label Grid.Column="0" FontWeight="Bold" Foreground="Brown"  Content="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+                                <Label Grid.Column="1" Content="{Binding Path=Size, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Label Grid.Column="3" Content="{Binding Path=Extension, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Red"/>
+                                <Label Grid.Column="2" Content="{Binding Path=CreationTime, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Border>
     </Grid>
 </Window>

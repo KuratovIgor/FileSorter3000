@@ -9,12 +9,56 @@ namespace FileSorter.Sorts
 {
     public class SortExtension : ISort
     {
-        public override void Sort(DirectoryInfo currentDirectory)
-        {
-            List<FileInfo> files = currentDirectory.GetFiles().ToList();
-            List<DirectoryInfo> newDirectories = CreateNewDirectories(currentDirectory, files);
+        private List<FileInfo> _files = null;
+        private readonly List<DirectoryInfo> _newDirectories = null;
+        private DirectoryInfo _currentDirectory = null;
 
-            MoveFilesToDirectories(files, newDirectories);
+        public void Sort(DirectoryInfo currentDirectory)
+        {
+            _currentDirectory = currentDirectory;
+
+            _files = _currentDirectory.GetFiles().ToList();
+            CreateNewDirectories();
+
+            MoveFilesToDirectories();
+        }
+
+        private void CreateNewDirectories()
+        {
+            bool isExist = false;
+
+            foreach (var file in _files)
+            {
+                DirectoryInfo newDir = new DirectoryInfo(_currentDirectory.FullName + $@"\{file.Extension}");
+
+                foreach (var directory in _newDirectories)
+                {
+                    if (directory.FullName == newDir.FullName)
+                    {
+                        isExist = true;
+                        break;
+                    }
+                }
+
+                if (!isExist)
+                    _newDirectories.Add(newDir);
+
+                isExist = false;
+            }
+        }
+
+        private void MoveFilesToDirectories()
+        {
+            foreach (var directory in _newDirectories)
+            {
+                directory.Create();
+
+                foreach (var file in _files)
+                {
+                    if (file.Extension == directory.Name)
+                            file.MoveTo(directory.FullName + $@"\{file.Name}");
+                }
+            }
         }
     }
 }
