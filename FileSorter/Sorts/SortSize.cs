@@ -26,7 +26,7 @@ namespace FileSorter.Sorts
         };
 
         private List<FileInfo> _files = null;
-        private readonly List<DirectoryInfo> _newDirectories = null;
+        private readonly List<DirectoryInfo> _newDirectories = new List<DirectoryInfo>();
         private DirectoryInfo _currentDirectory;
 
         public void Sort(DirectoryInfo currentDirectory)

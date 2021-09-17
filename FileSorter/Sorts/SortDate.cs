@@ -27,8 +27,8 @@ namespace FileSorter.Sorts
         };
 
         private DirectoryInfo _currentDirectory = null;
-        private readonly List<CatalogItem> _catalogItems = null;
-        private readonly List<DirectoryInfo> _newDirectories = null;
+        private readonly List<CatalogItem> _catalogItems = new List<CatalogItem>();
+        private readonly List<DirectoryInfo> _newDirectories = new List<DirectoryInfo>();
 
         public void Sort(DirectoryInfo currentDirectory)
         {

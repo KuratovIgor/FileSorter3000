@@ -10,7 +10,7 @@ namespace FileSorter.Sorts
     public class SortExtension : ISort
     {
         private List<FileInfo> _files = null;
-        private readonly List<DirectoryInfo> _newDirectories = null;
+        private readonly List<DirectoryInfo> _newDirectories = new List<DirectoryInfo>();
         private DirectoryInfo _currentDirectory = null;
 
         public void Sort(DirectoryInfo currentDirectory)
