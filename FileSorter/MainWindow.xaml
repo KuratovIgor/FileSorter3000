@@ -27,7 +27,7 @@
 
         <Border Grid.Row="1" Grid.Column="0" Margin="5" Width="110" Height="30" CornerRadius="10" Background="LightGray" BorderBrush="Black" BorderThickness="1">
             <Border.BitmapEffect>
-                <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
+                <DropShadowBitmapEffect ShadowDepth="1"></DropShadowBitmapEffect>
             </Border.BitmapEffect>
             <Button Background="LightGray" BorderBrush="LightGray" Content="Открыть" Command="{Binding OpenDirectoryCommand}" FontSize="15" FontFamily="Arial Italic" Width="90" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
@@ -35,7 +35,7 @@
         <TextBlock Margin="140 0 0 0" Grid.Row="1" Grid.Column="1" Text="Путь:" FontSize="15" FontFamily="Arial Italic" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Border Margin="0 0 40 0" HorizontalAlignment="Right" Background="White" CornerRadius="10" Width="750" Height="30" Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
             <Border.BitmapEffect>
-                <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
+                <DropShadowBitmapEffect ShadowDepth="1"></DropShadowBitmapEffect>
             </Border.BitmapEffect>
             <TextBlock x:Name="path" Text="{Binding Path=PathDir}" Background="White" TextAlignment="Center" FontSize="20" Width="720" Height="30"/>
         </Border>
@@ -44,7 +44,7 @@
 
         <Border Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="5" Width="70" Height="30" CornerRadius="10" Background="LightGray" BorderBrush="Black" BorderThickness="1">
             <Border.BitmapEffect>
-                <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
+                <DropShadowBitmapEffect ShadowDepth="1"></DropShadowBitmapEffect>
             </Border.BitmapEffect>
             <Button Command="{Binding BackCommand}" Background="LightGray" BorderBrush="LightGray" Width="50" Height="30" Content="Назад" FontSize="15" FontFamily="Arial Italic"/>
         </Border>
@@ -61,28 +61,28 @@
             <TextBlock Grid.Column="0" Text="Группировка:" FontSize="15" FontFamily="Arial Italic" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Border Grid.Column="1" Background="LightGray" CornerRadius="10" Width="120" Height="30" BorderBrush="Black" BorderThickness="1">
                 <Border.BitmapEffect>
-                    <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
+                    <DropShadowBitmapEffect ShadowDepth="1"></DropShadowBitmapEffect>
                 </Border.BitmapEffect>
                 <Button Command="{Binding SortExtensionCommand}" Content="Расширение" Background="LightGray" BorderBrush="LightGray" FontSize="15" FontFamily="Arial Italic" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
 
             <Border Grid.Column="2" Background="LightGray" CornerRadius="10" Width="120" Height="30" BorderBrush="Black" BorderThickness="1">
                 <Border.BitmapEffect>
-                    <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
+                    <DropShadowBitmapEffect ShadowDepth="1"></DropShadowBitmapEffect>
                 </Border.BitmapEffect>
                 <Button Command="{Binding SortAlphaviteCommand}" Content="Алфавит" Background="LightGray" BorderBrush="LightGray" FontSize="15" FontFamily="Arial Italic" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
 
             <Border Grid.Column="3" Background="LightGray" CornerRadius="10" Width="120" Height="30" BorderBrush="Black" BorderThickness="1">
                 <Border.BitmapEffect>
-                    <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
+                    <DropShadowBitmapEffect ShadowDepth="1"></DropShadowBitmapEffect>
                 </Border.BitmapEffect>
                 <Button Command="{Binding SortDateCommand}" Content="Дата" FontSize="15" FontFamily="Arial Italic" Background="LightGray" BorderBrush="LightGray" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
 
             <Border Grid.Column="4" Background="LightGray" CornerRadius="10" Width="120" Height="30" BorderBrush="Black" BorderThickness="1">
                 <Border.BitmapEffect>
-                    <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
+                    <DropShadowBitmapEffect ShadowDepth="1"></DropShadowBitmapEffect>
                 </Border.BitmapEffect>
                 <Button Command="{Binding SortSizeCommand}" Content="Размер" FontSize="15" FontFamily="Arial Italic" Background="LightGray" BorderBrush="LightGray" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
@@ -92,7 +92,7 @@
 
         <Border BorderBrush="Black"  BorderThickness="1" CornerRadius="10" Grid.Row="4" Grid.Column="0" Margin="10 10 10 10" Background="Beige">
             <Border.BitmapEffect>
-                <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
+                <DropShadowBitmapEffect ShadowDepth="1"></DropShadowBitmapEffect>
             </Border.BitmapEffect>
 
             <ListBox BorderBrush="Beige" Margin="5" Background="Beige" ItemsSource="{Binding DriveCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedDrive, UpdateSourceTrigger=PropertyChanged}">
@@ -106,14 +106,14 @@
 
         <Border Grid.Row="5" Grid.Column="0" Width="90" Height="25" Background="LightGray" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="10">
             <Border.BitmapEffect>
-                <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
+                <DropShadowBitmapEffect ShadowDepth="1"></DropShadowBitmapEffect>
             </Border.BitmapEffect>
             <Button FontFamily="Arial Italic" Background="LightGray" BorderBrush="LightGray" Width="70" Height="25" Content="Обновить" Command="{Binding UpdateDriveList}"/>
         </Border>
 
         <Border CornerRadius="10" Background="Linen" BorderBrush="Black" BorderThickness="1" Grid.Row="4" Grid.Column="1" Margin="10">
             <Border.BitmapEffect>
-                <OuterGlowBitmapEffect GlowColor="Black" GlowSize="5"></OuterGlowBitmapEffect>
+                <DropShadowBitmapEffect ShadowDepth="1"></DropShadowBitmapEffect>
             </Border.BitmapEffect>
             <ListBox Width="940" x:Name="catalogList" BorderBrush="Linen" Background="Linen" ItemsSource="{Binding DirectoryCollection, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedCatalogItem, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
